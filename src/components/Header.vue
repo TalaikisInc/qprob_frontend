@@ -1,6 +1,6 @@
 <template>
-    <div class="col-sm-3 tr-sidebar tr-sticky">
-        <div class="theiaStickySidebar">
+    <div class="col-sm-3 tr-sidebar">
+        <div>
             <div class="tr-menu sidebar-menu">
                 <nav class="navbar navbar-default">
                     <div class="navbar-header">
@@ -10,18 +10,22 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <router-link to="/"><img class="img-responsive" :src="$data.logoUrl" :alt="$data.logoAlt"></router-link>
-                    </div><!-- /navbar-header -->
+                        <a :href="baseUrl"><img class="img-responsive header-logo" :src="logoUrl" :alt="logoAlt"></a>
+                    </div>
 
                     <div class="collapse navbar-collapse" id="navbar-collapse">
-                        <span class="discover">Discover</span>
+                        <span class="discover"><!-- Discover --></span>
                         <ul class="nav navbar-nav">
-                            <li class="active dropdown"><a data-toggle="dropdown" href="#">
-                            <i class="fa fa-list" aria-hidden="true"></i>Home</a>
-                                <ul class="sub-menu">
-                                    <li v-for="cat in $data.categories">
-                                    <a :href="$data.baseUrl+'source/'+cat.slug+'/'" :alt="cat.title">{{ cat.title }} [{{ cat.post_count }}]</a></li>
-                                </ul>
+                            <li v-for="cat in categories">
+                                <a :href="baseUrl+'source/'+cat.slug+'/'" :alt="cat.title">
+                                <div v-if="cat.thumbnail">
+                                    <img class="img-responsive img-circle menuCat" :src="imgBaseUrl+cat.thumbnail" />
+                                </div>
+                                <div v-else>
+                                    <i class="fa fa-list" aria-hidden="true"></i>
+                                </div>
+                                <i>&nbsp;</i>
+                                {{ cat.title }} [{{ cat.post_count }}]</a>
                             </li>
                             <li class="active dropdown"><a data-toggle="dropdown" href="#">
                             <i class="fa fa-building-o" aria-hidden="true"></i>Business</a>
@@ -71,13 +75,15 @@ export default {
       baseUrl: vars.baseUrl,
       logoAlt: vars.logoAlt,
       logoUrl: vars.logoUrl,
+      imgBaseUrl: vars.imgBaseUrl,
+      // not used:
       keyword: vars.keyword,
       pageTitle: vars.siteTitle
     }
   },
   methods: {
     fetchData () {
-      axios.get('https://api.qprob.com/v2.0/all_cats/').then(response => {
+      axios.get(vars.apiUrl + '/all_cats/').then(response => {
         this.categories = response.data
         console.log(this.posts)
       }).catch(e => {

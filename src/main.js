@@ -3,6 +3,8 @@ import App from './App'
 import VueRouter from 'vue-router'
 import routes from './routes'
 import moment from 'moment'
+import 'vue-event-calendar/dist/style.css'
+import vueEventCalendar from 'vue-event-calendar'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
@@ -17,6 +19,8 @@ Vue.filter('formatDate', function (value) {
     return moment.utc(value).format('YYYY-MM-DD  hh:mm')
   }
 })
+
+Vue.use(vueEventCalendar, {locale: 'en'})
 
 /* eslint-disable no-new */
 new Vue({
