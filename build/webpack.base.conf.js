@@ -2,6 +2,8 @@ var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
+var PrerenderSpaPlugin = require('prerender-spa-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -18,6 +20,15 @@ module.exports = {
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
+  plugins: [
+    new CopyWebpackPlugin([{
+      from: 'src/assets'
+    }]),
+    new PrerenderSpaPlugin(
+      path.join(__dirname, 'dist'),
+      [ '/']
+    )
+  ],
   resolve: {
     extensions: ['.js', '.vue', '.json', 'css'],
     alias: {

@@ -3,11 +3,15 @@ import App from './App'
 import VueRouter from 'vue-router'
 import routes from './routes'
 import moment from 'moment'
-import 'vue-event-calendar/dist/style.css'
-import vueEventCalendar from 'vue-event-calendar'
+import axios from 'axios'
+import vars from './variables'
+import SocialSharing from 'vue-social-sharing'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
+axios.defaults.baseURL = vars.apiUrl
 Vue.config.productionTip = false
 Vue.use(VueRouter)
+Vue.use(SocialSharing)
 
 const router = new VueRouter({
   routes,
@@ -20,12 +24,11 @@ Vue.filter('formatDate', function (value) {
   }
 })
 
-Vue.use(vueEventCalendar, {locale: 'en'})
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  PulseLoader,
   template: '<App/>',
   components: { App }
 })

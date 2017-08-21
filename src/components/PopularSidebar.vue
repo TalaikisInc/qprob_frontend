@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     fetchPosts () {
-      axios.get(vars.apiUrl + '/most_popular/').then(response => {
+      axios.get('/most_popular/').then(response => {
         this.posts = response.data
       }).catch(e => {
         console.log(e)

@@ -11,7 +11,7 @@ export default {
   },
   methods: {
     fetchData () {
-      axios.get('https://api.qprob.com/v2.0/filled_tags/3/').then(response => {
+      axios.get('/top_tags/').then(response => {
         this.tags = response.data
       }).catch(e => {
         console.log(e)

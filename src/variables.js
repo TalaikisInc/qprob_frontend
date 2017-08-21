@@ -5,6 +5,8 @@ module.exports = {
   baseUrl: 'http://localhost:8080/',
   imgBaseUrl: 'https://qprob.com/',
   apiUrl: 'https://api.qprob.com/v2.0',
-  logoUrl: 'static/images/logo/stock_market.png',
-  keyword: 'quant_finance'
+  logo: 'static/images/logo/stock_market.png',
+  keyword: 'quant_finance',
+  twHandle: 'QProbcom',
+  fbHandle: 'QProb-1328788263849733'
 }

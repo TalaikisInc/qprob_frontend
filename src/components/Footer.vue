@@ -3,11 +3,9 @@
         <div class="footer-menu">
             <div class="container">
                 <ul class="nav navbar-nav">
-                    <li><a :href="baseUrl">Home</a></li>
                     <li><a :href="baseUrl+keyword+'/categories/'">Authors</a></li>
                     <li><a :href="baseUrl+keyword+'/tags/'">Tags</a></li>
-                    <li><a href="/">Add source</a></li>
-                    <li><a href="/">Contact Us</a></li>
+                    <li><a :href="baseUrl+keyword+'/sentiment/'">Sentiment</a></li>
                 </ul> 
             </div>
         </div>
@@ -38,11 +36,15 @@
             <div class="container">
                 <div class="footer-bottom-content">
                     <div class="footer-logo">
-                        <a :href="baseUrl"><img class="img-responsive" :src="logoUrl" :alt="logoAlt"></a>
+                        <a :href="baseUrl"><img class="img-responsive" :src="imgBaseUrl + logo" :alt="logoAlt"></a>
                     </div>
+                    <p><a :href="'https://twitter.com/' + twHandle"><i class="fa fa-twitter"></i></a> 
+                    <a :href="'https://www.facebook.com/' + fbHandle"><i class="fa fa-facebook"></i></a></p>
                     <p>World news summarized.</p>
                     <address>
-                        <p>&copy; 2017 <a :href="baseUrl">{{ siteName }}</a> | Developed by <a href="https://talaikis.com">Talaikis Inc.</a> | Runs on QProb v3.0</p>
+                        <p>&copy; 2017 <a :href="baseUrl">{{ siteName }}</a> | 
+                        Developed by <a href="https://talaikis.com">Talaikis Inc.</a> | 
+                        Runs on <a href="https://github.com/xenu256/QProb">QProb</a> v3.0</p>
                     </address>					
                 </div>
             </div>
@@ -62,14 +64,16 @@ export default {
       categories: this.categories,
       baseUrl: vars.baseUrl,
       logoAlt: vars.logoAlt,
-      logoUrl: vars.logoUrl,
+      logo: vars.logo,
       keyword: vars.keyword,
-      siteName: vars.siteName
+      imgBaseUrl: vars.imgBaseUrl,
+      twHandle: vars.twHandle,
+      fbHandle: vars.fbHandle
     }
   },
   methods: {
     fetchTags () {
-      axios.get(vars.apiUrl + '/top_tags/').then(response => {
+      axios.get('/top_tags/').then(response => {
         this.tags = response.data
       }).catch(e => {
         console.log(e)

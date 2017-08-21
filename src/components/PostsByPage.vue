@@ -6,10 +6,9 @@
         <div class="col-sm-8">
           <div class="tr-content">
             <div class="tr-ad">
-              <a href="#"><img class="img-responsive" src="static/images/advertise/1.jpg" alt="Image"></a>
+              <a href="#"><img class="img-responsive" :src="imgBaseUrl + 'static/images/advertise/1.jpg'" alt="Image"></a>
           </div>
-
-          <div class="tr-section bg-transparent">
+            <div class="tr-section bg-transparent">
             <div class="section-title">
               <h1><span><a href="#"><!-- Section title --></a></span></h1>
             </div>
@@ -49,7 +48,7 @@
       <div class="col-sm-4 tr-sidebar">
         <div>
           <div class="tr-section tr-widget tr-ad ad-before">
-            <a href="#"><img class="img-responsive" src="static/images/advertise/2.jpg" alt="Image"></a>
+            <a href="#"><img class="img-responsive" :src="imgBaseUrl + 'static/images/advertise/2.jpg'" alt="Image"></a>
           </div>
           <div class="tr-section tr-widget tr-ad ad-before">
             <popular-posts></popular-posts>
@@ -83,11 +82,17 @@ export default {
   },
   methods: {
     fetchData () {
-      axios.get('/posts/0/').then(response => {
+      axios.get('/posts/' + this.$route.params.page + '/').then(response => {
         this.posts = response.data
       }).catch(e => {
         console.log(e)
       })
+    }
+  },
+  props: {
+    page: {
+      type: Number,
+      required: true
     }
   },
   components: {

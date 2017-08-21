@@ -10,7 +10,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a :href="baseUrl"><img class="img-responsive header-logo" :src="logoUrl" :alt="logoAlt"></a>
+                        <a :href="baseUrl"><img class="img-responsive header-logo" :src="imgBaseUrl + logo" :alt="logoAlt"></a>
                     </div>
 
                     <div class="collapse navbar-collapse" id="navbar-collapse">
@@ -74,11 +74,8 @@ export default {
       categories: this.categories,
       baseUrl: vars.baseUrl,
       logoAlt: vars.logoAlt,
-      logoUrl: vars.logoUrl,
-      imgBaseUrl: vars.imgBaseUrl,
-      // not used:
-      keyword: vars.keyword,
-      pageTitle: vars.siteTitle
+      logo: vars.logo,
+      imgBaseUrl: vars.imgBaseUrl
     }
   },
   methods: {
