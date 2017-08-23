@@ -6,9 +6,8 @@
       <div class="row">
         <div class="col-sm-8">
           <div class="tr-content">
-            <div class="tr-ad">
-              <a href="#"><img class="img-responsive" :src="imgBaseUrl + 'static/images/advertise/1.jpg'" alt="Image"></a>
-          </div>
+            <ad-component :type="0"></ad-component>
+
             <div class="tr-section bg-transparent">
             <div class="section-title">
               <h1><span><a href="#"><!-- Section title --></a></span></h1>
@@ -35,7 +34,18 @@
                         <h2 class="entry-title">
                         <a :href="baseUrl+post.slug+'/'">{{ post.title }}</a> 
                         <div v-bind:class="[(post.sentiment >= 0) ? 'sentiment-pos' : 'sentiment-neg']" v-if="post.sentiment">[{{ post.sentiment }}]</div></h2>
-                        <p c-if="post.summary">{{ post.summary }}</p>
+                        <p><span v-for="tag in tags" :key="tag.id"><a :href="baseUrl + 'tag/' + tag.slug + '/'">{{ tag.title }}</a> | </span></p>
+                        <hr />
+                        <div v-if="post.status == 0">
+                          <p>{{ post.summary }}</p>
+                        </div>
+                        <div v-else>
+                          <span v-html="post.content"></span>
+                        </div>
+                        <social-sharing :url="baseUrl + post.slug + '/'" :title="post.title"></social-sharing>
+                        <div class="comment-list">
+                          <disqus :shortname="disqusID" :identifier="post.title" :url="baseUrl + post.slug + '/'"></disqus>
+                        </div>
                   </div>
                 </div>
             </div>
@@ -46,9 +56,7 @@
 
       <div class="col-sm-4 tr-sidebar">
         <div>
-          <div class="tr-section tr-widget tr-ad ad-before">
-            <a href="#"><img class="img-responsive" :src="imgBaseUrl + 'static/images/advertise/2.jpg'" alt="Image"></a>
-          </div>
+          <ad-component :type="1"></ad-component>
           <div class="tr-section tr-widget tr-ad ad-before">
             <popular-posts></popular-posts>
           </div>
@@ -68,23 +76,37 @@ import Footer from './Footer.vue'
 import Paginator from './Paginator.vue'
 import Popular from './PopularSidebar.vue'
 import SocialSharing from './SocialSharing.vue'
+import Ads from './Ads.vue'
+import VueDisqus from 'vue-disqus/VueDisqus.vue'
 
 export default {
   name: 'post',
   data () {
     return {
       post: this.post,
+      tags: this.tags,
       baseUrl: vars.baseUrl,
-      imgBaseUrl: vars.imgBaseUrl
+      imgBaseUrl: vars.imgBaseUrl,
+      disqusID: vars.disqusID
     }
   },
   methods: {
+    getPost () {
+      return axios.get('/post/' + this.$route.params.postSlug + '/')
+    },
+    getTags () {
+      return axios.get('/post_tags/' + this.$route.params.postSlug + '/')
+    },
+    regHit () {
+      return axios.get('/post_hit/' + this.$route.params.postSlug + '/')
+    },
     fetchData () {
-      axios.get('/post/' + this.$route.params.postSlug + '/').then(response => {
-        this.post = response.data[0]
-      }).catch(e => {
-        console.log(e)
-      })
+      var self = this
+      axios.all([self.getPost(), self.getTags(), self.regHit()])
+      .then(axios.spread(function (posts, tags, hit) {
+        self.post = posts.data[0]
+        self.tags = tags.data
+      }))
     }
   },
   components: {
@@ -92,7 +114,9 @@ export default {
     'footer-component': Footer,
     'popular-posts': Popular,
     'paginator-component': Paginator,
-    'social-sharing': SocialSharing
+    'social-sharing': SocialSharing,
+    'ad-component': Ads,
+    'disqus': VueDisqus
   },
   mounted () {
     this.fetchData()

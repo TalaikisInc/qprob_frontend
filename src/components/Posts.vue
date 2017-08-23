@@ -5,9 +5,7 @@
       <div class="row">
         <div class="col-sm-8">
           <div class="tr-content">
-            <div class="tr-ad">
-              <a href="#"><img class="img-responsive" src="static/images/advertise/1.jpg" alt="Image"></a>
-          </div>
+            <ad-component :type="0"></ad-component>
 
           <div class="tr-section bg-transparent">
             <div class="section-title">
@@ -48,9 +46,7 @@
 
       <div class="col-sm-4 tr-sidebar">
         <div>
-          <div class="tr-section tr-widget tr-ad ad-before">
-            <a href="#"><img class="img-responsive" src="static/images/advertise/2.jpg" alt="Image"></a>
-          </div>
+          <ad-component :type="1"></ad-component>
           <div class="tr-section tr-widget tr-ad ad-before">
             <popular-posts></popular-posts>
           </div>
@@ -70,6 +66,7 @@ import Footer from './Footer.vue'
 import Paginator from './Paginator.vue'
 import Popular from './PopularSidebar.vue'
 import chunk from '../chunk'
+import Ads from './Ads.vue'
 
 export default {
   name: 'posts',
@@ -94,7 +91,8 @@ export default {
     'header-component': Header,
     'footer-component': Footer,
     'popular-posts': Popular,
-    'paginator-component': Paginator
+    'paginator-component': Paginator,
+    'ad-component': Ads
   },
   computed: {
     chunkPosts () {

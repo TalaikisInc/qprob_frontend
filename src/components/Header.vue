@@ -16,6 +16,7 @@
                     <div class="collapse navbar-collapse" id="navbar-collapse">
                         <span class="discover"><!-- Discover --></span>
                         <ul class="nav navbar-nav">
+                            <li><a :href="baseUrl + keyword + '/today/'"><i class="fa fa-calendar-o" aria-hidden="true"></i> Today</a></li>
                             <li v-for="cat in categories">
                                 <a :href="baseUrl+'source/'+cat.slug+'/'" :alt="cat.title">
                                 <div v-if="cat.thumbnail">
@@ -75,14 +76,14 @@ export default {
       baseUrl: vars.baseUrl,
       logoAlt: vars.logoAlt,
       logo: vars.logo,
-      imgBaseUrl: vars.imgBaseUrl
+      imgBaseUrl: vars.imgBaseUrl,
+      keyword: vars.keyword
     }
   },
   methods: {
     fetchData () {
-      axios.get(vars.apiUrl + '/all_cats/').then(response => {
+      axios.get('/all_cats/').then(response => {
         this.categories = response.data
-        console.log(this.posts)
       }).catch(e => {
         console.log(e)
       })

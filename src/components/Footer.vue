@@ -68,6 +68,7 @@ export default {
       keyword: vars.keyword,
       imgBaseUrl: vars.imgBaseUrl,
       twHandle: vars.twHandle,
+      siteName: vars.siteName,
       fbHandle: vars.fbHandle
     }
   },

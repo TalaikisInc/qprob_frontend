@@ -8,5 +8,6 @@ module.exports = {
   logo: 'static/images/logo/stock_market.png',
   keyword: 'quant_finance',
   twHandle: 'QProbcom',
-  fbHandle: 'QProb-1328788263849733'
+  fbHandle: 'QProb-1328788263849733',
+  disqusID: 'QProb'
 }

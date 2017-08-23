@@ -5,13 +5,11 @@ import routes from './routes'
 import moment from 'moment'
 import axios from 'axios'
 import vars from './variables'
-import SocialSharing from 'vue-social-sharing'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
 axios.defaults.baseURL = vars.apiUrl
 Vue.config.productionTip = false
 Vue.use(VueRouter)
-Vue.use(SocialSharing)
 
 const router = new VueRouter({
   routes,
