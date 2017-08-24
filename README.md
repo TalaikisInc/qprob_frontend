@@ -7,7 +7,7 @@ where QPob on Django/ Python acts as backend, Golang as an intermediate through 
 
 ## Status
 
-Not finished, moved to Nuxt version.
+Not finished, moved to Nuxt version: [qprob_frontend2](https://github.com/xenu256/qprob_frontend2).
 
 ## Setup
 
