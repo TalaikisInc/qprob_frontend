@@ -87,6 +87,9 @@ export default {
       })
     }
   },
+  head: {
+    title: vars.homeTitle + vars.baseTitle
+  },
   components: {
     'header-component': Header,
     'footer-component': Footer,
@@ -102,6 +105,9 @@ export default {
       const pages = Math.floor(this.posts[0].total_posts / 20)
       return pages <= 250 ? pages : 250
     }
+  },
+  created: function () {
+    document.title = vars.siteName
   },
   mounted () {
     this.fetchData()

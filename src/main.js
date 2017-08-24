@@ -5,7 +5,6 @@ import routes from './routes'
 import moment from 'moment'
 import axios from 'axios'
 import vars from './variables'
-import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
 axios.defaults.baseURL = vars.apiUrl
 Vue.config.productionTip = false
@@ -26,7 +25,6 @@ Vue.filter('formatDate', function (value) {
 new Vue({
   el: '#app',
   router,
-  PulseLoader,
   template: '<App/>',
   components: { App }
 })

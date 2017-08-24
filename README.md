@@ -1,5 +1,3 @@
-# vue
-
 # [QProb](https://github.com/xenu256/QProb) Frontend
 
 QProb Frontend is the part of the new v3 [(Q3](https://github.com/xenu256/Q3)) strategy to 
@@ -9,7 +7,7 @@ where QPob on Django/ Python acts as backend, Golang as an intermediate through 
 
 ## Status
 
-In dev.
+Not finished, moved to Nuxt version.
 
 ## Setup
 

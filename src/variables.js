@@ -1,6 +1,8 @@
 module.exports = {
   logoAlt: '',
   siteName: 'Trading News',
+  homeTitle: 'Quantitative trading news',
+  baseTitle: ' | QProb Trading News',
   // https://qprob.com/
   baseUrl: 'http://localhost:8080/',
   imgBaseUrl: 'https://qprob.com/',

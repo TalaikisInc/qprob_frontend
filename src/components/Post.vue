@@ -1,4 +1,3 @@
-<!-- Post.vue -->
 <template>
 <div>
   <header-component></header-component>
